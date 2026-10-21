@@ -1,6 +1,6 @@
 const dummy = () => {
   return 1;
-}
+};
 
 const totalLikes = (blogs) => {
   const sum = blogs.reduce((sum, blog) => {
@@ -8,7 +8,7 @@ const totalLikes = (blogs) => {
   }, 0);
 
   return sum;
-}
+};
 
 const favoriteBlog = (blogs) => {
   if (!blogs || blogs.length === 0) return null;
@@ -18,7 +18,7 @@ const favoriteBlog = (blogs) => {
   }, blogs[0]);
 
   return mostLikedBlog;
-}
+};
 
 const mostBlogs = (blogs) => {
   if (!blogs || blogs.length === 0) return null;
@@ -40,7 +40,7 @@ const mostBlogs = (blogs) => {
   }
 
   return mostBlogsAuthor;
-}
+};
 
 const mostLikes = (blogs) => {
   if (!blogs || blogs.length === 0) return null;
@@ -60,12 +60,12 @@ const mostLikes = (blogs) => {
       mostLikesAuthor = {
         author: blog.author,
         likes: count,
-      }
+      };
     }
   }
 
   return mostLikesAuthor;
-}
+};
 
 module.exports = {
   dummy,
@@ -73,4 +73,4 @@ module.exports = {
   favoriteBlog,
   mostBlogs,
   mostLikes,
-}
+};
