@@ -25,18 +25,22 @@ vi.mock('react-router-dom', async () => {
   }
 })
 
+const renderWithRouter = (component) => {
+  return render(
+    <MemoryRouter>
+      {component}
+    </MemoryRouter>
+  )
+}
+
 describe('<Blog />', () => {
   beforeEach(() => {
     mockUpdateHandler.mockClear()
     mockNavigate.mockClear()
-    render(
-      <MemoryRouter>
-        <Blog blog={blog} updateBlog={mockUpdateHandler} />
-      </MemoryRouter>
-    )
+    renderWithRouter(<Blog blog={blog} updateBlog={mockUpdateHandler} />)
   })
 
-  test.only('render blog', () => {
+  test('render blog', () => {
     const title = screen.getByText('Component test with react-testing-library')
     const author = screen.getByText('by Author Name')
     const url = screen.getByText('http://localhost:3003/')
@@ -63,7 +67,7 @@ describe('<Blog />', () => {
         name: 'Superuser',
       }
 
-      render(<Blog blog={blog} user={user} updateBlog={mockUpdateHandler} />)
+      renderWithRouter(<Blog blog={blog} user={user} updateBlog={mockUpdateHandler} />)
     })
 
     test('like button is shown', () => {
@@ -93,7 +97,7 @@ describe('<Blog />', () => {
           name: 'Username',
         }
 
-        render(<Blog blog={blog} user={user} updateBlog={mockUpdateHandler} />)
+        renderWithRouter(<Blog blog={blog} user={user} updateBlog={mockUpdateHandler} />)
       })
 
       test('blog creator is shown the remove button', () => {
