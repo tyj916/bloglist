@@ -1,0 +1,20 @@
+PUT http://localhost:3003/api/blogs/6abfbffb2cd5a433cb4cca41
+Content-Type: application/json
+
+{
+  "title": "test edit",
+  "author": "author",
+  "url": "http://localhost:3001/",
+  "likes": 0
+}
+
+### test no author
+PUT http://localhost:3003/api/blogs/6abfbffb2cd5a433cb4cca41
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "author",
+  "url": "http://localhost:3001/",
+  "likes": 0
+}

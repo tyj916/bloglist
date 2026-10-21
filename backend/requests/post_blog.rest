@@ -1,0 +1,44 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "test",
+  "author": "author",
+  "url": "http://localhost:3001/",
+  "likes": 0
+}
+
+### test no title
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "author",
+  "url": "http://localhost:3001/",
+  "likes": 0
+}
+
+### with user
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "test",
+  "author": "author",
+  "url": "http://localhost:3001/",
+  "likes": 0,
+  "userId": "6ac629e9837e2b95eefbfd9c"
+}
+
+### with token
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjZhYzYyOWU5ODM3ZTJiOTVlZWZiZmQ5YyIsImlhdCI6MTc5MTM5NjE0NX0.6NCsQaI6XJJGYLn9f5qSj4ZwxuiQ-1bzz9fufRcFXXM
+
+{
+  "title": "test",
+  "author": "author",
+  "url": "http://localhost:3001/",
+  "likes": 0
+}

@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+.notification {
+  font-size: 1.2rem;
+  padding: 16px;
+  background-color: lightgray;
+  border: 2px solid darkslategrey;
+  border-radius: 2px;
+  color: darkslategrey;
+}
