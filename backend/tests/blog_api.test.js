@@ -240,6 +240,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .put(`/api/blogs/${blogToUpdate.id}`)
+        .set('Authorization', `Bearer ${authToken}`)
         .send({
           ...blogToUpdate,
           title: 'Updated Title',
@@ -262,6 +263,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .put(`/api/blogs/${blogToUpdate.id}`)
+        .set('Authorization', `Bearer ${authToken}`)
         .send({
           ...blogToUpdate,
           title: '',
