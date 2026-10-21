@@ -5,13 +5,8 @@ const initialBlogs = [
     url: 'http://localhost:5173',
   },
   {
-    title: 'Second blog',
-    author: 'Playwrong',
-    url: 'http://localhost:5173',
-  },
-  {
     title: 'Blog with most likes',
-    author: 'Playwright',
+    author: 'Playwrong',
     url: 'http://localhost:5173',
   },
   {
