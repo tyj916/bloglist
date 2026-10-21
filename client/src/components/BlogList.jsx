@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 const BlogList = ({ blogs }) => {
-  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
 
   return (
     <div>

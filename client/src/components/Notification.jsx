@@ -15,7 +15,7 @@ const Notification = ({ notification, setNotification }) => {
   if (!notification) return null
 
   return (
-    <Alert severity={notification.type} sx={{ my: 2}}>
+    <Alert severity={notification.type} sx={{ my: 2 }}>
       <p>{notification.text}</p>
     </Alert>
   )

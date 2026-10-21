@@ -17,19 +17,19 @@ const LoginForm = ({ login }) => {
       <h2>Log in to application</h2>
       <form onSubmit={handleLogin}>
         <div>
-          <TextField 
-            label='Username' 
-            value={username} 
+          <TextField
+            label='Username'
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             variant='standard'
             margin='dense'
           />
         </div>
         <div>
-          <TextField 
-            label='Password' 
+          <TextField
+            label='Password'
             type='password'
-            value={password} 
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             variant='standard'
             margin='dense'

@@ -25,7 +25,7 @@ const BlogForm = ({ addBlog }) => {
           <TextField
             label="Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)} 
+            onChange={(e) => setTitle(e.target.value)}
             variant='outlined'
             size='small'
             margin='dense'
@@ -36,7 +36,7 @@ const BlogForm = ({ addBlog }) => {
           <TextField
             label="Author"
             value={author}
-            onChange={(e) => setAuthor(e.target.value)} 
+            onChange={(e) => setAuthor(e.target.value)}
             variant='outlined'
             size='small'
             margin='dense'
@@ -47,7 +47,7 @@ const BlogForm = ({ addBlog }) => {
           <TextField
             label="Url"
             value={url}
-            onChange={(e) => setUrl(e.target.value)} 
+            onChange={(e) => setUrl(e.target.value)}
             variant='outlined'
             size='small'
             margin='dense'

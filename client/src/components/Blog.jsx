@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom"
-import { Box, Button, Paper, Stack, Typography } from "@mui/material"
+import { Link, useNavigate } from 'react-router-dom'
+import { Box, Button, Paper, Stack, Typography } from '@mui/material'
 
 const Blog = ({ blog, user, updateBlog, removeBlog }) => {
   const navigate = useNavigate()
@@ -30,7 +30,7 @@ const Blog = ({ blog, user, updateBlog, removeBlog }) => {
       </Typography>
       <Typography sx={{ color: 'text.secondary' }}>by {blog.author}</Typography>
       <Typography component={Link} to={blog.url} target="_blank" sx={{
-        '&:visited': { color: 'primary.main' } 
+        '&:visited': { color: 'primary.main' }
       }}>
         {blog.url}
       </Typography>
@@ -38,7 +38,7 @@ const Blog = ({ blog, user, updateBlog, removeBlog }) => {
       <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
         <Typography>Likes: {blog.likes}</Typography>
         {user && <Button variant="outlined" onClick={handleLike} size="small">Like</Button>}
-        {user && blog.user.id === user.id 
+        {user && blog.user.id === user.id
           && <Button variant="outlined" onClick={handleRemove} size="small" color="error">Remove</Button>
         }
       </Stack>

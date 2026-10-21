@@ -42,20 +42,20 @@ const App = () => {
       setUser(user)
       navigate('/')
     } catch {
-      setNotification({ text: 'Wrong credentials', type: 'error'})
+      setNotification({ text: 'Wrong credentials', type: 'error' })
     }
   }
 
   const logout = () => {
     window.localStorage.removeItem('loggedBlogAppUser')
-    setNotification({ text: 'Successfully logged out', type: 'success'})
+    setNotification({ text: 'Successfully logged out', type: 'success' })
     setUser(null)
   }
 
   const addBlog = async (blogObject) => {
     const returnedBlog = await blogService.create(blogObject)
     setBlogs(blogs.concat(returnedBlog))
-    setNotification({ text: `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`, type: 'success'})
+    setNotification({ text: `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`, type: 'success' })
   }
 
   const updateBlog = async (blogObject) => {
@@ -68,24 +68,24 @@ const App = () => {
     await blogService.remove(blogObject)
     const newBlogs = blogs.filter(blog => blog.id !== blogObject.id)
     setBlogs(newBlogs)
-    setNotification({text: `${blogObject.title} by ${blogObject.author} has been deleted`, type: 'success'})
+    setNotification({ text: `${blogObject.title} by ${blogObject.author} has been deleted`, type: 'success' })
   }
 
   return (
     <Container>
       <AppBar position='static' sx={{ mb: 2 }}>
         <Toolbar>
-          <Typography variant='h1' sx={{ fontSize: "2em", flexGrow: 1 }}>
-            <Button 
-              color='inherit' 
-              component={Link} to='/' 
+          <Typography variant='h1' sx={{ fontSize: '2em', flexGrow: 1 }}>
+            <Button
+              color='inherit'
+              component={Link} to='/'
               sx={{ fontSize: 'inherit', textTransform: 'none' }}
             >Blog App</Button>
           </Typography>
           <Button color='inherit' component={Link} to='/'>Blogs</Button>
           {user && <Button color='inherit' component={Link} to='/create'>New Blog</Button>}
-          {user 
-            ? <Button color='inherit' onClick={logout}>Logout</Button> 
+          {user
+            ? <Button color='inherit' onClick={logout}>Logout</Button>
             : <Button color='inherit' component={Link} to='/login'>Login</Button>
           }
         </Toolbar>
@@ -95,18 +95,18 @@ const App = () => {
 
       <Routes>
         <Route path='/' element={
-          <BlogList 
-            blogs={blogs} 
-            setBlogs={setBlogs} 
+          <BlogList
+            blogs={blogs}
+            setBlogs={setBlogs}
             user={user} />
         } />
 
         <Route path='/blogs/:id' element={
-          <Blog 
-            blog={blog} 
+          <Blog
+            blog={blog}
             user={user}
-            updateBlog={updateBlog} 
-            removeBlog={removeBlog} 
+            updateBlog={updateBlog}
+            removeBlog={removeBlog}
           />
         } />
 
