@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Box, Button, Paper, Stack, Typography } from '@mui/material'
+import NotFound from './NotFound'
 
 const Blog = ({ blog, user, updateBlog, removeBlog }) => {
   const navigate = useNavigate()
 
-  if (!blog) return null
+  if (!blog) return <NotFound />
 
   const handleLike = () => {
     const newBlog = {

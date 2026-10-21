@@ -9,6 +9,7 @@ import Notification from './components/Notification'
 import BlogList from './components/BlogList'
 import { Container, AppBar, Toolbar, Button, Typography } from '@mui/material'
 import ErrorBoundary from './components/ErrorBoundary'
+import NotFound from './components/NotFound'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -126,6 +127,8 @@ const App = () => {
             <LoginForm login={login} />
           </ErrorBoundary>
         } />
+
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </Container>
   )
