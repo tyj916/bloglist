@@ -3,6 +3,11 @@ const User = require("../models/user");
 const logger = require("./logger");
 
 const requestLogger = (req, res, next) => {
+  if (req.path === '/api/login' && req.method === 'POST') {
+    logger.info(`${req.method} ${req.path} - [Body Redacted for Security]`);
+    return next();
+  }
+
   logger.info("Method:", req.method);
   logger.info("Path:  ", req.path);
   logger.info("Body:  ", req.body);
