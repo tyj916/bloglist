@@ -21,7 +21,7 @@ const BlogForm = ({ addBlog }) => {
     <div>
       <h2>Create New</h2>
       <form onSubmit={handleSubmit}>
-        <p>
+        <div>
           <TextField
             label="Title"
             value={title}
@@ -31,8 +31,8 @@ const BlogForm = ({ addBlog }) => {
             margin='dense'
             sx={{ width: 'min(100%, 400px)' }}
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <TextField
             label="Author"
             value={author}
@@ -42,8 +42,8 @@ const BlogForm = ({ addBlog }) => {
             margin='dense'
             sx={{ width: 'min(100%, 400px)' }}
           />
-        </p>
-        <p>
+        </div>
+        <div>
           <TextField
             label="Url"
             value={url}
@@ -53,7 +53,7 @@ const BlogForm = ({ addBlog }) => {
             margin='dense'
             sx={{ width: 'min(100%, 400px)' }}
           />
-        </p>
+        </div>
 
         <Button type='submit' variant='contained' style={{ marginTop: 10 }}>Create</Button>
       </form>
