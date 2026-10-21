@@ -31,14 +31,15 @@ if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testingRouter);
 }
 
-app.use(middleware.unknownEndpoint);
-app.use(middleware.errorHandler);
-
+// serve the built Vite frontend in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.use(express.static(path.join(__dirname, '../client/dist')))
   app.get('/*splat', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'))
   })
 }
+
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
 
 module.exports = app;
