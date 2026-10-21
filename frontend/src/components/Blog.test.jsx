@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 import { describe } from 'vitest'
@@ -28,16 +29,22 @@ describe('<Blog />', () => {
   beforeEach(() => {
     mockUpdateHandler.mockClear()
     mockNavigate.mockClear()
-    render(<Blog blog={blog} updateBlog={mockUpdateHandler} />)
+    render(
+      <MemoryRouter>
+        <Blog blog={blog} updateBlog={mockUpdateHandler} />
+      </MemoryRouter>
+    )
   })
 
-  test('render blog', () => {
-    const title = screen.getByText('Author Name: Component test with react-testing-library')
+  test.only('render blog', () => {
+    const title = screen.getByText('Component test with react-testing-library')
+    const author = screen.getByText('by Author Name')
     const url = screen.getByText('http://localhost:3003/')
     const likes = screen.getByText('Likes: 1')
-    const name = screen.getByText('Username')
+    const name = screen.getByText('Added by Username')
 
     expect(title).toBeVisible()
+    expect(author).toBeVisible()
     expect(url).toBeVisible()
     expect(likes).toBeVisible()
     expect(name).toBeVisible()
