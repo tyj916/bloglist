@@ -66,10 +66,11 @@ describe('Blog app', () => {
 
       test('user can view blog details', async ({ page }) => {
         await page.getByRole('link', { name: `${blog.title} by ${blog.author}` }).click()
-        await expect(page.getByText(`${blog.author}: ${blog.title}`)).toBeVisible()
+        await expect(page.getByRole('heading', { name: blog.title })).toBeVisible()
+        await expect(page.getByText(`by ${blog.author}`, { exact: true })).toBeVisible()
         await expect(page.getByText(blog.url)).toBeVisible()
+        await expect(page.getByText('Added by Playwright Test User')).toBeVisible()
         await expect(page.getByText(/Likes:/)).toBeVisible()
-        await expect(page.getByText('Playwright Test User', { exact: true })).toBeVisible()
       })
 
       test('user can like the blog', async ({ page }) => {
