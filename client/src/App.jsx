@@ -11,11 +11,12 @@ import { Container, AppBar, Toolbar, Button, Typography } from "@mui/material";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import { useBlogActions } from "./stores/useBlogStore"
+import { useNotificationActions } from "./stores/useNotificationStore";
 
 const App = () => {
   const blogControls = useBlogActions()
+  const { setNotification } = useNotificationActions()
   const [user, setUser] = useState(null);
-  const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,30 +40,30 @@ const App = () => {
       setUser(user);
       navigate("/");
     } catch {
-      setNotification({ text: "Wrong credentials", type: "error" });
+      setNotification("Wrong credentials", "error");
     }
   };
 
   const logout = () => {
     window.localStorage.removeItem("loggedBlogAppUser");
-    setNotification({ text: "Successfully logged out", type: "success" });
+    setNotification("Successfully logged out", "success");
     setUser(null);
   };
 
   const addBlog = async (blogObject) => {
     const returnedBlog = await blogControls.add(blogObject)
-    setNotification({
-      text: `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
-      type: "success",
-    });
+    setNotification(
+      `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
+      "success",
+    );
   };
 
   const removeBlog = async (blogObject) => {
     await blogControls.remove(blogObject.id)
-    setNotification({
-      text: `${blogObject.title} by ${blogObject.author} has been deleted`,
-      type: "success",
-    });
+    setNotification(
+      `${blogObject.title} by ${blogObject.author} has been deleted`,
+      "success",
+    );
   };
 
   return (

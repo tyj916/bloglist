@@ -2,8 +2,8 @@ import { create } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 
 const useNotificationStore = create((set, get) => ({
-  message: 'test',
-  type: 'success',
+  message: '',
+  type: '',
   actions: {
     setNotification: (message, type) => set(() => ({ message, type }))
   }
