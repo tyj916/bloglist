@@ -5,7 +5,7 @@ import Blog from "./Blog";
 import useBlogStore from "../stores/useBlogStore";
 
 const mockNavigate = vi.fn();
-const mockLikeAction = vi.fn();
+const mockLikeBlog = vi.fn();
 
 vi.mock("react-router-dom", async () => {
   const originalModule = await vi.importActual("react-router-dom");
@@ -15,16 +15,6 @@ vi.mock("react-router-dom", async () => {
     useParams: () => ({ id: "blog-id" })
   };
 });
-
-vi.mock("../stores/useBlogStore", async () => {
-  const actual = await vi.importActual("../stores/useBlogStore");
-  return {
-    ...actual,
-    useBlogActions: () => ({
-      like: mockLikeAction
-    })
-  }
-})
 
 const renderWithRouter = (component) => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
@@ -77,7 +67,7 @@ describe("<Blog />", () => {
       };
 
       renderWithRouter(
-        <Blog user={user} />,
+        <Blog user={user} likeBlog={mockLikeBlog}  />,
       );
     });
 
@@ -97,7 +87,7 @@ describe("<Blog />", () => {
       await user.click(likeButton);
       await user.click(likeButton);
 
-      expect(mockLikeAction).toHaveBeenCalledTimes(2);
+      expect(mockLikeBlog).toHaveBeenCalledTimes(2);
     });
 
     describe("and the user is creator", () => {
@@ -109,7 +99,7 @@ describe("<Blog />", () => {
         };
 
         renderWithRouter(
-          <Blog user={user} />,
+          <Blog user={user} likeBlog={mockLikeBlog}  />,
         );
       });
 
