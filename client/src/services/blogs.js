@@ -32,8 +32,8 @@ const update = async (newObject) => {
   return response.data;
 };
 
-const remove = async (object) => {
-  const url = `${baseUrl}/${object.id}`;
+const remove = async (id) => {
+  const url = `${baseUrl}/${id}`;
 
   const config = {
     headers: { Authorization: token },
