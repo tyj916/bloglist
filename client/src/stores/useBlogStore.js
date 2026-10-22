@@ -21,4 +21,4 @@ const useBlogStore = create((set, get) => ({
 }))
 
 export const useBlogs = () => useBlogStore(state => state.blogs)
-export const useBlogControls = () => useBlogStore(state => state.actions)
+export const useBlogActions = () => useBlogStore(state => state.actions)

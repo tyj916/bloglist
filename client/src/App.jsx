@@ -10,10 +10,10 @@ import BlogList from "./components/BlogList";
 import { Container, AppBar, Toolbar, Button, Typography } from "@mui/material";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
-import { useBlogControls } from "./stores/useBlogStore"
+import { useBlogActions } from "./stores/useBlogStore"
 
 const App = () => {
-  const blogControls = useBlogControls()
+  const blogControls = useBlogActions()
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
