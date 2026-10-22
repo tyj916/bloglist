@@ -99,10 +99,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
 
-      <Notification
-        notification={notification}
-        setNotification={setNotification}
-      />
+      <Notification />
 
       <Routes>
         <Route
