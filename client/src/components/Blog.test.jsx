@@ -2,28 +2,29 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import Blog from "./Blog";
-import { describe } from "vitest";
+import useBlogStore from "../stores/useBlogStore";
 
-const blog = {
-  title: "Component test with react-testing-library",
-  author: "Author Name",
-  url: "http://localhost:3003/",
-  likes: 1,
-  user: {
-    id: "god",
-    name: "Username",
-  },
-};
-const mockUpdateHandler = vi.fn();
 const mockNavigate = vi.fn();
+const mockLikeAction = vi.fn();
 
 vi.mock("react-router-dom", async () => {
   const originalModule = await vi.importActual("react-router-dom");
   return {
     ...originalModule,
     useNavigate: () => mockNavigate,
+    useParams: () => ({ id: "blog-id" })
   };
 });
+
+vi.mock("../stores/useBlogStore", async () => {
+  const actual = await vi.importActual("../stores/useBlogStore");
+  return {
+    ...actual,
+    useBlogActions: () => ({
+      like: mockLikeAction
+    })
+  }
+})
 
 const renderWithRouter = (component) => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
@@ -31,9 +32,21 @@ const renderWithRouter = (component) => {
 
 describe("<Blog />", () => {
   beforeEach(() => {
-    mockUpdateHandler.mockClear();
     mockNavigate.mockClear();
-    renderWithRouter(<Blog blog={blog} updateBlog={mockUpdateHandler} />);
+    useBlogStore.setState({ blogs: [
+      {
+        id: "blog-id",
+        title: "Component test with react-testing-library",
+        author: "Author Name",
+        url: "http://localhost:3003/",
+        likes: 1,
+        user: {
+          id: "god",
+          name: "Username",
+        },
+      },
+    ] });
+    renderWithRouter(<Blog />);
   });
 
   test("render blog", () => {
@@ -64,7 +77,7 @@ describe("<Blog />", () => {
       };
 
       renderWithRouter(
-        <Blog blog={blog} user={user} updateBlog={mockUpdateHandler} />,
+        <Blog user={user} />,
       );
     });
 
@@ -84,7 +97,7 @@ describe("<Blog />", () => {
       await user.click(likeButton);
       await user.click(likeButton);
 
-      expect(mockUpdateHandler.mock.calls).toHaveLength(2);
+      expect(mockLikeAction).toHaveBeenCalledTimes(2);
     });
 
     describe("and the user is creator", () => {
@@ -96,7 +109,7 @@ describe("<Blog />", () => {
         };
 
         renderWithRouter(
-          <Blog blog={blog} user={user} updateBlog={mockUpdateHandler} />,
+          <Blog user={user} />,
         );
       });
 

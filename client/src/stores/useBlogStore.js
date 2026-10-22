@@ -26,3 +26,4 @@ const useBlogStore = create((set, get) => ({
 
 export const useBlogs = () => useBlogStore(state => state.blogs)
 export const useBlogActions = () => useBlogStore(state => state.actions)
+export default useBlogStore
