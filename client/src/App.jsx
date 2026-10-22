@@ -13,13 +13,13 @@ import NotFound from "./components/NotFound";
 import { useBlogControls } from "./stores/useBlogStore"
 
 const App = () => {
-  const { initialize } = useBlogControls()
+  const blogControls = useBlogControls()
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => initialize(blogs));
+    blogService.getAll().then((blogs) => blogControls.initialize(blogs));
   }, []);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const App = () => {
 
   const addBlog = async (blogObject) => {
     const returnedBlog = await blogService.create(blogObject);
-    setBlogs(blogs.concat(returnedBlog));
+    blogControls.add(returnedBlog);
     setNotification({
       text: `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
       type: "success",
