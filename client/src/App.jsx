@@ -50,8 +50,7 @@ const App = () => {
   };
 
   const addBlog = async (blogObject) => {
-    const returnedBlog = await blogService.create(blogObject);
-    blogControls.add(returnedBlog);
+    const returnedBlog = await blogControls.add(blogObject)
     setNotification({
       text: `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
       type: "success",
