@@ -1,8 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import NotFound from "./NotFound";
+import { useBlogs } from "../stores/useBlogStore";
 
-const Blog = ({ blog, user, updateBlog, removeBlog }) => {
+const Blog = ({ user, updateBlog, removeBlog }) => {
+  const id = useParams().id;
+  const blogs = useBlogs()
+  const blog = blogs.find(blog => blog.id === id);
   const navigate = useNavigate();
 
   if (!blog) return <NotFound />;

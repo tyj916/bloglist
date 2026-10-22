@@ -10,16 +10,13 @@ import BlogList from "./components/BlogList";
 import { Container, AppBar, Toolbar, Button, Typography } from "@mui/material";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
-import { useBlogs, useBlogControls } from "./stores/useBlogStore"
+import { useBlogControls } from "./stores/useBlogStore"
 
 const App = () => {
-  const blogs = useBlogs()
   const { initialize } = useBlogControls()
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
-  const match = useMatch("/blogs/:id");
-  const blog = match ? blogs.find((blog) => blog.id === match.params.id) : null;
 
   useEffect(() => {
     blogService.getAll().then((blogs) => initialize(blogs));
@@ -133,7 +130,6 @@ const App = () => {
           element={
             <ErrorBoundary>
               <Blog
-                blog={blog}
                 user={user}
                 updateBlog={updateBlog}
                 removeBlog={removeBlog}
