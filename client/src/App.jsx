@@ -58,6 +58,14 @@ const App = () => {
     );
   };
 
+  const likeBlog = (blog) => {
+    blogControls.like(blog.id);
+    setNotification(
+      `Liked ${blog.title} by ${blog.author}`,
+      "success",
+    );
+  }
+
   const removeBlog = async (blogObject) => {
     await blogControls.remove(blogObject.id)
     setNotification(
@@ -118,6 +126,7 @@ const App = () => {
             <ErrorBoundary>
               <Blog
                 user={user}
+                likeBlog={likeBlog}
                 removeBlog={removeBlog}
               />
             </ErrorBoundary>
