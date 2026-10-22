@@ -57,14 +57,6 @@ const App = () => {
     });
   };
 
-  const updateBlog = async (blogObject) => {
-    const updatedBlog = await blogService.update(blogObject);
-    const newBlogs = blogs.map((blog) =>
-      blog.id === updatedBlog.id ? updatedBlog : blog,
-    );
-    setBlogs(newBlogs);
-  };
-
   const removeBlog = async (blogObject) => {
     await blogService.remove(blogObject);
     const newBlogs = blogs.filter((blog) => blog.id !== blogObject.id);
@@ -130,7 +122,6 @@ const App = () => {
             <ErrorBoundary>
               <Blog
                 user={user}
-                updateBlog={updateBlog}
                 removeBlog={removeBlog}
               />
             </ErrorBoundary>

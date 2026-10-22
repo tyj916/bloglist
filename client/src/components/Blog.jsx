@@ -1,23 +1,19 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import NotFound from "./NotFound";
-import { useBlogs } from "../stores/useBlogStore";
+import { useBlogs, useBlogControls } from "../stores/useBlogStore";
 
-const Blog = ({ user, updateBlog, removeBlog }) => {
+const Blog = ({ user, removeBlog }) => {
   const id = useParams().id;
   const blogs = useBlogs()
   const blog = blogs.find(blog => blog.id === id);
   const navigate = useNavigate();
+  const blogControls = useBlogControls()
 
   if (!blog) return <NotFound />;
 
   const handleLike = () => {
-    const newBlog = {
-      ...blog,
-      likes: blog.likes + 1,
-    };
-
-    updateBlog(newBlog);
+    blogControls.like(blog.id);
   };
 
   const handleRemove = () => {
