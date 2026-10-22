@@ -13,9 +13,8 @@ import NotFound from "./components/NotFound";
 import { useBlogs, useBlogControls } from "./stores/useBlogStore"
 
 const App = () => {
-  const zustandBlogs = useBlogs()
+  const blogs = useBlogs()
   const { initialize } = useBlogControls()
-  const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
@@ -124,7 +123,7 @@ const App = () => {
           path="/"
           element={
             <ErrorBoundary>
-              <BlogList blogs={zustandBlogs} setBlogs={setBlogs} user={user} />
+              <BlogList />
             </ErrorBoundary>
           }
         />
