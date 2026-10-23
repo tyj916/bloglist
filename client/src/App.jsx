@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
-import Blog from "./components/Blog";
-import LoginForm from "./components/LoginForm";
-import BlogForm from "./components/BlogForm";
+import Blog from "./views/Blog";
+import LoginForm from "./views/LoginForm";
+import BlogForm from "./views/BlogForm";
+import BlogList from "./views/BlogList";
 import Notification from "./components/Notification";
-import BlogList from "./components/BlogList";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import NavBar from "./components/NavBar";

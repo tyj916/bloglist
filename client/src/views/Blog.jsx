@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
-import NotFound from "./NotFound";
+import NotFound from "../components/NotFound";
 import { useBlogActions, useBlogs } from "../stores/useBlogStore";
 import { useNotificationActions } from "../stores/useNotificationStore";
 import { useLogin } from "../stores/useLoginStore";
