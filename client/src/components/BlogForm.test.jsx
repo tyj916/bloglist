@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import BlogForm from "./BlogForm";
+import { useBlogActions } from "../stores/useBlogStore";
 
 const mockNavigate = vi.fn();
 
@@ -11,6 +12,24 @@ vi.mock("react-router-dom", async () => {
     useNavigate: () => mockNavigate,
   };
 });
+
+const mockAddBlog = vi.fn().mockResolvedValue({
+  id: '123',
+  title: "React test title textbox",
+  author: "React test author textbox",
+  url: "React test url textbox",
+  likes: 0,
+});
+
+vi.mock("../stores/useBlogStore", async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    useBlogActions: vi.fn(),
+  }
+})
+
+vi.mocked(useBlogActions).mockReturnValue({ add: mockAddBlog })
 
 describe("<BlogForm />", () => {
   const addBlog = vi.fn();
@@ -38,9 +57,11 @@ describe("<BlogForm />", () => {
     await user.type(urlInput, "React test url textbox");
     await user.click(submitButton);
 
-    expect(addBlog.mock.calls).toHaveLength(1);
-    expect(addBlog.mock.calls[0][0].title).toBe("React test title textbox");
-    expect(addBlog.mock.calls[0][0].author).toBe("React test author textbox");
-    expect(addBlog.mock.calls[0][0].url).toBe("React test url textbox");
+    expect(mockAddBlog).toHaveBeenCalledTimes(1);
+    expect(mockAddBlog).toHaveBeenCalledWith({
+      title: "React test title textbox",
+      author: "React test author textbox",
+      url: "React test url textbox",
+    });
   });
 });
