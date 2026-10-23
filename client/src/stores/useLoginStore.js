@@ -27,5 +27,5 @@ const useLoginStore = create((set) => ({
   }
 }))
 
-export const useLogin = () => useLoginStore(state => state.user)
+export const useLoginUser = () => useLoginStore(state => state.user)
 export const useLoginActions = () => useLoginStore(state => state.actions)

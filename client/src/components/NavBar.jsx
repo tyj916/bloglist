@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Button, Typography } from '@mui/material'
-import { useLogin, useLoginActions } from '../stores/useLoginStore';
+import { useLoginUser, useLoginActions } from '../stores/useLoginStore';
 import { useNotificationActions } from "../stores/useNotificationStore";
 
 const NavBar = () => {
-  const currentUser = useLogin()
-  const userActions = useLoginActions()
+  const currentUser = useLoginUser()
+  const loginActions = useLoginActions()
   const { setNotification } = useNotificationActions()
 
   const logout = () => {
-    userActions.logout()
+    loginActions.logout()
     setNotification("Successfully logged out", "success");
   };
 

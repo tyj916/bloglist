@@ -3,13 +3,13 @@ import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import NotFound from "../components/NotFound";
 import { useBlogActions, useBlogs } from "../stores/useBlogStore";
 import { useNotificationActions } from "../stores/useNotificationStore";
-import { useLogin } from "../stores/useLoginStore";
+import { useLoginUser } from "../stores/useLoginStore";
 
 const Blog = () => {
   const id = useParams().id;
   const blogs = useBlogs()
   const blog = blogs.find(blog => blog.id === id);
-  const currentUser = useLogin()
+  const currentUser = useLoginUser()
   const navigate = useNavigate();
   const { like, remove } = useBlogActions()
   const { setNotification } = useNotificationActions()
