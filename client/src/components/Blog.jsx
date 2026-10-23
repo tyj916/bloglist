@@ -4,12 +4,12 @@ import NotFound from "./NotFound";
 import { useBlogActions, useBlogs } from "../stores/useBlogStore";
 import { useNotificationActions } from "../stores/useNotificationStore";
 
-const Blog = ({ user, removeBlog }) => {
+const Blog = ({ user }) => {
   const id = useParams().id;
   const blogs = useBlogs()
   const blog = blogs.find(blog => blog.id === id);
   const navigate = useNavigate();
-  const { like } = useBlogActions()
+  const { like, remove } = useBlogActions()
   const { setNotification } = useNotificationActions()
 
   if (!blog) return <NotFound />;
@@ -22,12 +22,17 @@ const Blog = ({ user, removeBlog }) => {
     );
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
     const confirm = window.confirm(
       `Remove blog ${blog.title} by ${blog.author}?`,
     );
+
     if (confirm) {
-      removeBlog(blog);
+      await remove(blog.id);
+      setNotification(
+        `${blog.title} by ${blog.author} has been deleted`,
+        "success",
+      );
       navigate("/");
     }
   };

@@ -58,14 +58,6 @@ const App = () => {
     );
   };
 
-  const removeBlog = async (blogObject) => {
-    await blogActions.remove(blogObject.id)
-    setNotification(
-      `${blogObject.title} by ${blogObject.author} has been deleted`,
-      "success",
-    );
-  };
-
   return (
     <Container>
       <AppBar position="static" sx={{ mb: 2 }}>
@@ -118,7 +110,6 @@ const App = () => {
             <ErrorBoundary>
               <Blog
                 user={user}
-                removeBlog={removeBlog}
               />
             </ErrorBoundary>
           }
