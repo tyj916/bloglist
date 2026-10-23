@@ -5,7 +5,7 @@ import blogService from "../services/blogs"
 const useUserStore = create((set) => ({
   user: null,
   actions: {
-    initialize: async () => {
+    initialize: () => {
       const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser");
       if (loggedUserJSON) {
         const user = JSON.parse(loggedUserJSON);
@@ -19,7 +19,7 @@ const useUserStore = create((set) => ({
       blogService.setToken(user.token);
       set(() => ({ user }));
     },
-    logout: async () => {
+    logout: () => {
       window.localStorage.removeItem("loggedBlogAppUser");
       set(() => ({ user: null }))
     }
