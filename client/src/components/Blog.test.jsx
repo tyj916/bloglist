@@ -2,10 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import Blog from "./Blog";
-import useBlogStore from "../stores/useBlogStore";
+import useBlogStore, { useBlogActions } from "../stores/useBlogStore";
 
 const mockNavigate = vi.fn();
-const mockLikeBlog = vi.fn();
 
 vi.mock("react-router-dom", async () => {
   const originalModule = await vi.importActual("react-router-dom");
@@ -16,26 +15,38 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
+const like = vi.fn();
+
+vi.mock("../stores/useBlogStore", async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    useBlogActions: vi.fn()
+  }
+})
+vi.mocked(useBlogActions).mockReturnValue({ like })
+
 const renderWithRouter = (component) => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
 };
 
 describe("<Blog />", () => {
   beforeEach(() => {
-    mockNavigate.mockClear();
-    useBlogStore.setState({ blogs: [
-      {
-        id: "blog-id",
-        title: "Component test with react-testing-library",
-        author: "Author Name",
-        url: "http://localhost:3003/",
-        likes: 1,
-        user: {
-          id: "god",
-          name: "Username",
-        },
+    vi.clearAllMocks();
+
+    const initialBlogs = [{
+      id: "blog-id",
+      title: "Component test with react-testing-library",
+      author: "Author Name",
+      url: "http://localhost:3003/",
+      likes: 1,
+      user: {
+        id: "god",
+        name: "Username",
       },
-    ] });
+    }]
+
+    useBlogStore.setState({ blogs: initialBlogs });
     renderWithRouter(<Blog />);
   });
 
@@ -67,7 +78,7 @@ describe("<Blog />", () => {
       };
 
       renderWithRouter(
-        <Blog user={user} likeBlog={mockLikeBlog}  />,
+        <Blog user={user} />,
       );
     });
 
@@ -83,11 +94,12 @@ describe("<Blog />", () => {
 
     test("clicking the like button 2 times calls event handler twice", async () => {
       const user = userEvent.setup();
+
       const likeButton = screen.getByText("Like");
       await user.click(likeButton);
       await user.click(likeButton);
 
-      expect(mockLikeBlog).toHaveBeenCalledTimes(2);
+      expect(like).toHaveBeenCalledTimes(2);
     });
 
     describe("and the user is creator", () => {
@@ -99,7 +111,7 @@ describe("<Blog />", () => {
         };
 
         renderWithRouter(
-          <Blog user={user} likeBlog={mockLikeBlog}  />,
+          <Blog user={user} />,
         );
       });
 
