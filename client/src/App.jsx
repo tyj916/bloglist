@@ -14,13 +14,13 @@ import { useBlogActions } from "./stores/useBlogStore"
 import { useNotificationActions } from "./stores/useNotificationStore";
 
 const App = () => {
-  const blogControls = useBlogActions()
+  const blogActions = useBlogActions()
   const { setNotification } = useNotificationActions()
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    blogControls.initialize();
+    blogActions.initialize();
   }, []);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const App = () => {
   };
 
   const addBlog = async (blogObject) => {
-    const returnedBlog = await blogControls.add(blogObject)
+    const returnedBlog = await blogActions.add(blogObject)
     setNotification(
       `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
       "success",
@@ -59,7 +59,7 @@ const App = () => {
   };
 
   const likeBlog = (blog) => {
-    blogControls.like(blog.id);
+    blogActions.like(blog.id);
     setNotification(
       `Liked ${blog.title} by ${blog.author}`,
       "success",
@@ -67,7 +67,7 @@ const App = () => {
   }
 
   const removeBlog = async (blogObject) => {
-    await blogControls.remove(blogObject.id)
+    await blogActions.remove(blogObject.id)
     setNotification(
       `${blogObject.title} by ${blogObject.author} has been deleted`,
       "success",
