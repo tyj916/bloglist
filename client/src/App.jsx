@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 import Blog from "./components/Blog";
 import LoginForm from "./components/LoginForm";
 import BlogForm from "./components/BlogForm";
@@ -81,9 +81,7 @@ const App = () => {
           path="/blogs/:id"
           element={
             <ErrorBoundary>
-              <Blog
-                user={user}
-              />
+              <Blog />
             </ErrorBoundary>
           }
         />
