@@ -104,7 +104,7 @@ describe("<Blog />", () => {
 
       renderBlog();
 
-      const likeButton = screen.getByText("Like");
+      const likeButton = screen.getByRole("button", { name: "Like" });
       await user.click(likeButton);
       await user.click(likeButton);
 
