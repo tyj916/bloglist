@@ -31,10 +31,7 @@ const App = () => {
 
   const login = async (credentials) => {
     try {
-      const user = await loginService.login(credentials);
-      window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user));
-      blogService.setToken(user.token);
-      setUser(user);
+      await userActions.login(credentials);
       navigate("/");
     } catch {
       setNotification("Wrong credentials", "error");

@@ -12,6 +12,12 @@ const useUserStore = create((set) => ({
         blogService.setToken(user.token);
         set(() => ({ user }))
       }
+    },
+    login: async (credentials) => {
+      const user = await loginService.login(credentials);
+      window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user));
+      blogService.setToken(user.token);
+      set(() => ({ user }));
     }
   }
 }))
