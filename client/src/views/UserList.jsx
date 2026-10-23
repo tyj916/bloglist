@@ -1,4 +1,7 @@
 import { useEffect } from "react"
+import { 
+  TableContainer, Table, TableHead, TableBody, TableRow, TableCell,
+} from "@mui/material"
 import { useUserActions, useUsers } from "../stores/useUserStore"
 
 const UserList = () => {
@@ -10,11 +13,29 @@ const UserList = () => {
 
   const users = useUsers()
 
-  console.log(users)
-
   return (
     <div>
-      userlist
+      <h2>Users</h2>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Username</TableCell>
+              <TableCell>Blogs Created</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map(user => (
+              <TableRow key={user.id}>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.username}</TableCell>
+                <TableCell>{user.blogs.length}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   )
 }
