@@ -14,15 +14,23 @@ const BlogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const returnedBlog = await add({ title, author, url });
-    setNotification(
-      `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
-      "success",
-    );
-    setTitle("");
-    setAuthor("");
-    setUrl("");
-    navigate("/");
+
+    try {
+      const returnedBlog = await add({ title, author, url });
+      setNotification(
+        `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
+        "success",
+      );
+      setTitle("");
+      setAuthor("");
+      setUrl("");
+      navigate("/");
+    } catch {
+      setNotification(
+        `Failed to add ${title} by ${author}`,
+        "error",
+      )
+    }
   };
 
   return (
