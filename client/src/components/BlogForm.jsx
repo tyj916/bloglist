@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
+import { useBlogActions } from "../stores/useBlogStore";
+import { useNotificationActions } from "../stores/useNotificationStore";
 
-const BlogForm = ({ addBlog }) => {
+const BlogForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
   const navigate = useNavigate();
+  const { add } = useBlogActions();
+  const { setNotification } = useNotificationActions()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addBlog({ title, author, url });
+    const returnedBlog = await add({ title, author, url });
+    setNotification(
+      `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
+      "success",
+    );
     setTitle("");
     setAuthor("");
     setUrl("");

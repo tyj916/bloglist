@@ -50,14 +50,6 @@ const App = () => {
     setUser(null);
   };
 
-  const addBlog = async (blogObject) => {
-    const returnedBlog = await blogActions.add(blogObject)
-    setNotification(
-      `A new blog ${returnedBlog.title} by ${returnedBlog.author} is added`,
-      "success",
-    );
-  };
-
   return (
     <Container>
       <AppBar position="static" sx={{ mb: 2 }}>
@@ -119,7 +111,7 @@ const App = () => {
           path="/create"
           element={
             <ErrorBoundary>
-              <BlogForm addBlog={addBlog} />
+              <BlogForm />
             </ErrorBoundary>
           }
         />
