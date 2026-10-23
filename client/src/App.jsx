@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
 
 import Blog from "./views/Blog";
-import LoginForm from "./views/LoginForm";
 import BlogForm from "./views/BlogForm";
 import BlogList from "./views/BlogList";
+import LoginForm from "./views/LoginForm";
+import User from "./views/User";
 import UserList from "./views/UserList";
 
 import Notification from "./components/Notification";
@@ -76,6 +77,15 @@ const App = () => {
           element={
             <ErrorBoundary>
               <UserList />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route 
+          path="/users/:username"
+          element={
+            <ErrorBoundary>
+              <User />
             </ErrorBoundary>
           }
         />
