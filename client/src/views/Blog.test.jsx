@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import Blog from "./Blog";
-import useBlogStore, { useBlogActions } from "../stores/useBlogStore";
+import useBlogStore, { useBlogs, useBlogActions } from "../stores/useBlogStore";
 import { useLoginUser } from "../stores/useLoginStore";
 
 const mockNavigate = vi.fn();
@@ -22,6 +22,7 @@ vi.mock("../stores/useBlogStore", async (importOriginal) => {
   const actual = await importOriginal()
   return {
     ...actual,
+    useBlogs: vi.fn(),
     useBlogActions: vi.fn()
   }
 })
@@ -39,7 +40,7 @@ describe("<Blog />", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    const initialBlogs = [{
+    const mockBlogs = [{
       id: "blog-id",
       title: "Component test with react-testing-library",
       author: "Author Name",
@@ -51,7 +52,8 @@ describe("<Blog />", () => {
       },
     }]
 
-    useBlogStore.setState({ blogs: initialBlogs });
+    useBlogs.mockReturnValue(mockBlogs)
+
     renderWithRouter(<Blog />);
   });
 
