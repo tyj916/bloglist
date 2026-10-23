@@ -18,6 +18,10 @@ const useUserStore = create((set) => ({
       window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user));
       blogService.setToken(user.token);
       set(() => ({ user }));
+    },
+    logout: async () => {
+      window.localStorage.removeItem("loggedBlogAppUser");
+      set(() => ({ user: null }))
     }
   }
 }))

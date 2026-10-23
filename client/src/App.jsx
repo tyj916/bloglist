@@ -39,9 +39,8 @@ const App = () => {
   };
 
   const logout = () => {
-    window.localStorage.removeItem("loggedBlogAppUser");
+    userActions.logout()
     setNotification("Successfully logged out", "success");
-    setUser(null);
   };
 
   return (
