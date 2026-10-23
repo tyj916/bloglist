@@ -31,9 +31,7 @@ vi.mock("../stores/useLoginStore", () => ({
   useLoginUser: vi.fn(),
 }))
 
-const renderWithRouter = (component) => {
-  return render(<MemoryRouter>{component}</MemoryRouter>);
-};
+const renderBlog = () => render(<MemoryRouter><Blog /></MemoryRouter>);
 
 describe("<Blog />", () => {
   const mockBlogs = [{
@@ -56,7 +54,7 @@ describe("<Blog />", () => {
   });
 
   test("render blog", () => {
-    renderWithRouter(<Blog />);
+    renderBlog();
 
     const title = screen.getByText("Component test with react-testing-library");
     const author = screen.getByText("by Author Name");
@@ -72,7 +70,7 @@ describe("<Blog />", () => {
   });
 
   test("like button is not displayed to unauthenticated user", () => {
-    renderWithRouter(<Blog />);
+    renderBlog();
 
     const button = screen.queryByRole("button", { name: "Like" });
     expect(button).not.toBeInTheDocument();
@@ -90,13 +88,13 @@ describe("<Blog />", () => {
     });
 
     test("like button is shown", () => {
-      renderWithRouter(<Blog />);
+      renderBlog();
       const button = screen.getByRole("button", { name: "Like" });
       expect(button).toBeVisible();
     });
 
     test("remove button is not shown to non creator", () => {
-      renderWithRouter(<Blog />);
+      renderBlog();
       const button = screen.queryByRole("button", { name: "Remove" });
       expect(button).not.toBeInTheDocument();
     });
@@ -104,7 +102,7 @@ describe("<Blog />", () => {
     test("clicking the like button 2 times calls event handler twice", async () => {
       const user = userEvent.setup();
 
-      renderWithRouter(<Blog />);
+      renderBlog();
 
       const likeButton = screen.getByText("Like");
       await user.click(likeButton);
@@ -125,7 +123,7 @@ describe("<Blog />", () => {
       });
 
       test("blog creator is shown the remove button", () => {
-        renderWithRouter(<Blog />);
+        renderBlog();
         const button = screen.getByRole("button", { name: "Remove" });
         expect(button).toBeVisible();
       });
