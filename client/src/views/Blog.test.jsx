@@ -31,21 +31,38 @@ vi.mock("../stores/useLoginStore", () => ({
   useLoginUser: vi.fn(),
 }))
 
-const renderBlog = () => render(<MemoryRouter><Blog /></MemoryRouter>);
+const mockBlogs = [{
+  id: "blog-id",
+  title: "Component test with react-testing-library",
+  author: "Author Name",
+  url: "http://localhost:3003/",
+  likes: 1,
+  user: {
+    id: "god",
+    name: "Username",
+  },
+}]
+
+const loggedInUser = {
+  id: "root",
+  username: "root",
+  name: "Superuser",
+};
+
+const creatorUser = {
+  id: "god",
+  username: "Username",
+  name: "Username",
+};
+
+const renderBlog = () => 
+  render(
+  <MemoryRouter>
+    <Blog />
+  </MemoryRouter>
+  );
 
 describe("<Blog />", () => {
-  const mockBlogs = [{
-    id: "blog-id",
-    title: "Component test with react-testing-library",
-    author: "Author Name",
-    url: "http://localhost:3003/",
-    likes: 1,
-    user: {
-      id: "god",
-      name: "Username",
-    },
-  }]
-
   beforeEach(() => {
     vi.clearAllMocks();
     useBlogs.mockReturnValue(mockBlogs)
@@ -56,17 +73,13 @@ describe("<Blog />", () => {
   test("render blog", () => {
     renderBlog();
 
-    const title = screen.getByText("Component test with react-testing-library");
-    const author = screen.getByText("by Author Name");
-    const url = screen.getByText("http://localhost:3003/");
-    const likes = screen.getByText("Likes: 1");
-    const name = screen.getByText("Added by Username");
-
-    expect(title).toBeVisible();
-    expect(author).toBeVisible();
-    expect(url).toBeVisible();
-    expect(likes).toBeVisible();
-    expect(name).toBeVisible();
+    expect(
+      screen.getByText("Component test with react-testing-library")
+    ).toBeVisible();
+    expect(screen.getByText("by Author Name")).toBeVisible();
+    expect(screen.getByText("http://localhost:3003/")).toBeVisible();
+    expect(screen.getByText("Likes: 1")).toBeVisible();
+    expect(screen.getByText("Added by Username")).toBeVisible();
   });
 
   test("like button is not displayed to unauthenticated user", () => {
@@ -78,13 +91,7 @@ describe("<Blog />", () => {
 
   describe("when a user is logged in", () => {
     beforeEach(() => {
-      const user = {
-        id: "root",
-        username: "root",
-        name: "Superuser",
-      };
-
-      useLoginUser.mockReturnValue(user)
+      useLoginUser.mockReturnValue(loggedInUser)
     });
 
     test("like button is shown", () => {
@@ -110,23 +117,17 @@ describe("<Blog />", () => {
 
       expect(like).toHaveBeenCalledTimes(2);
     });
+  });
 
-    describe("and the user is creator", () => {
-      beforeEach(() => {
-        const user = {
-          id: "god",
-          username: "Username",
-          name: "Username",
-        };
+  describe("and the user is creator", () => {
+    beforeEach(() => {
+      useLoginUser.mockReturnValue(creatorUser)
+    });
 
-        useLoginUser.mockReturnValue(user)
-      });
-
-      test("blog creator is shown the remove button", () => {
-        renderBlog();
-        const button = screen.getByRole("button", { name: "Remove" });
-        expect(button).toBeVisible();
-      });
+    test("blog creator is shown the remove button", () => {
+      renderBlog();
+      const button = screen.getByRole("button", { name: "Remove" });
+      expect(button).toBeVisible();
     });
   });
 });
