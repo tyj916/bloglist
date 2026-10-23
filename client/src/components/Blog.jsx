@@ -14,8 +14,8 @@ const Blog = ({ user }) => {
 
   if (!blog) return <NotFound />;
 
-  const handleLike = () => {
-    like(blog.id);
+  const handleLike = async () => {
+    await like(blog.id);
     setNotification(
       `Liked ${blog.title} by ${blog.author}`,
       "success",
