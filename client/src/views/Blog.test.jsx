@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import Blog from "./Blog";
 import useBlogStore, { useBlogActions } from "../stores/useBlogStore";
+import { useLoginUser } from "../stores/useLoginStore";
 
 const mockNavigate = vi.fn();
 
@@ -29,6 +30,10 @@ vi.mocked(useBlogActions).mockReturnValue({ like })
 const renderWithRouter = (component) => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
 };
+
+vi.mock("../stores/useLoginStore", () => ({
+  useLoginUser: vi.fn(),
+}))
 
 describe("<Blog />", () => {
   beforeEach(() => {
@@ -77,8 +82,10 @@ describe("<Blog />", () => {
         name: "Superuser",
       };
 
+      useLoginUser.mockReturnValue(user)
+
       renderWithRouter(
-        <Blog user={user} />,
+        <Blog />,
       );
     });
 
@@ -110,8 +117,10 @@ describe("<Blog />", () => {
           name: "Username",
         };
 
+        useLoginUser.mockReturnValue(user)
+
         renderWithRouter(
-          <Blog user={user} />,
+          <Blog />,
         );
       });
 

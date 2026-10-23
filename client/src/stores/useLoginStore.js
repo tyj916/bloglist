@@ -29,3 +29,4 @@ const useLoginStore = create((set) => ({
 
 export const useLoginUser = () => useLoginStore(state => state.user)
 export const useLoginActions = () => useLoginStore(state => state.actions)
+export default useLoginStore
