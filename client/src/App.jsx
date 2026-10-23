@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Container } from "@mui/material";
 import Blog from "./components/Blog";
 import LoginForm from "./components/LoginForm";
 import BlogForm from "./components/BlogForm";
 import Notification from "./components/Notification";
 import BlogList from "./components/BlogList";
-import { Container } from "@mui/material";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
+import NavBar from "./components/NavBar";
 import { useBlogActions } from "./stores/useBlogStore"
 import { useUserActions } from "./stores/useUserStore";
-import NavBar from "./components/NavBar";
 
 const App = () => {
   const blogActions = useBlogActions()
