@@ -4,7 +4,10 @@ import blogService from '../services/blogs'
 const useBlogStore = create((set, get) => ({
   blogs: [],
   actions: {
-    initialize: blogs => set(() => ({ blogs })),
+    initialize: async () => {
+      const blogs = await blogService.getAll()
+      set(() => ({ blogs }))
+    },
     add: async (blogObject) => {
       const newBlog = await blogService.create(blogObject);
       set(state => ({ blogs: [...state.blogs, newBlog] }));

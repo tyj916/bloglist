@@ -20,7 +20,7 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => blogControls.initialize(blogs));
+    blogControls.initialize();
   }, []);
 
   useEffect(() => {
