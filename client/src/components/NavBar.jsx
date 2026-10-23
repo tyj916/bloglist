@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Button, Typography } from '@mui/material'
-import { useUser, useUserActions } from '../stores/useUserStore';
+import { useLogin, useLoginActions } from '../stores/useLoginStore';
 import { useNotificationActions } from "../stores/useNotificationStore";
 
 const NavBar = () => {
-  const user = useUser()
-  const userActions = useUserActions()
+  const currentUser = useLogin()
+  const userActions = useLoginActions()
   const { setNotification } = useNotificationActions()
 
   const logout = () => {
@@ -29,12 +29,12 @@ const NavBar = () => {
         <Button color="inherit" component={Link} to="/">
           Blogs
         </Button>
-        {user && (
+        {currentUser && (
           <Button color="inherit" component={Link} to="/create">
             New Blog
           </Button>
         )}
-        {user ? (
+        {currentUser ? (
           <Button color="inherit" onClick={logout}>
             Logout
           </Button>

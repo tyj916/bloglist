@@ -3,13 +3,13 @@ import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import NotFound from "./NotFound";
 import { useBlogActions, useBlogs } from "../stores/useBlogStore";
 import { useNotificationActions } from "../stores/useNotificationStore";
-import { useUser } from "../stores/useUserStore";
+import { useLogin } from "../stores/useLoginStore";
 
 const Blog = () => {
   const id = useParams().id;
   const blogs = useBlogs()
   const blog = blogs.find(blog => blog.id === id);
-  const user = useUser()
+  const currentUser = useLogin()
   const navigate = useNavigate();
   const { like, remove } = useBlogActions()
   const { setNotification } = useNotificationActions()
@@ -63,12 +63,12 @@ const Blog = () => {
       </Typography>
       <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
         <Typography>Likes: {blog.likes}</Typography>
-        {user && (
+        {currentUser && (
           <Button variant="outlined" onClick={handleLike} size="small">
             Like
           </Button>
         )}
-        {user && blog.user.id === user.id && (
+        {currentUser && blog.user.id === currentUser.id && (
           <Button
             variant="outlined"
             onClick={handleRemove}

@@ -10,18 +10,18 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import NavBar from "./components/NavBar";
 import { useBlogActions } from "./stores/useBlogStore"
-import { useUserActions } from "./stores/useUserStore";
+import { useLoginActions } from "./stores/useLoginStore";
 
 const App = () => {
   const blogActions = useBlogActions()
-  const userActions = useUserActions()
+  const loginActions = useLoginActions()
 
   useEffect(() => {
     blogActions.initialize();
   }, []);
 
   useEffect(() => {
-    userActions.initialize();
+    loginActions.initialize();
   }, []);
 
   return (

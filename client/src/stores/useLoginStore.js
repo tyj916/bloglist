@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import loginService from "../services/login"
 import blogService from "../services/blogs"
 
-const useUserStore = create((set) => ({
+const useLoginStore = create((set) => ({
   user: null,
   actions: {
     initialize: () => {
@@ -27,5 +27,5 @@ const useUserStore = create((set) => ({
   }
 }))
 
-export const useUser = () => useUserStore(state => state.user)
-export const useUserActions = () => useUserStore(state => state.actions)
+export const useLogin = () => useLoginStore(state => state.user)
+export const useLoginActions = () => useLoginStore(state => state.actions)
