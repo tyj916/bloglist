@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 import { 
   TableContainer, Table, TableHead, TableBody, TableRow, TableCell,
 } from "@mui/material"
@@ -28,7 +29,9 @@ const UserList = () => {
           <TableBody>
             {users.map(user => (
               <TableRow key={user.username}>
-                <TableCell>{user.name}</TableCell>
+                <TableCell>
+                  <Link to={`/users/${user.username}`}>{user.name}</Link>
+                </TableCell>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.blogs.length}</TableCell>
               </TableRow>
