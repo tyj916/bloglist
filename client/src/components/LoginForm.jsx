@@ -1,15 +1,27 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useUserActions } from "../stores/useUserStore";
+import { useNotificationActions } from "../stores/useNotificationStore";
 
-const LoginForm = ({ login }) => {
+const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useUserActions()
+  const { setNotification } = useNotificationActions()
+  const navigate = useNavigate()
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    login({ username, password });
-    setUsername("");
-    setPassword("");
+
+    try {
+      await login({ username, password });
+      setUsername("");
+      setPassword("");
+      navigate("/");
+    } catch {
+      setNotification("Wrong credentials", "error");
+    }
   };
 
   return (

@@ -17,7 +17,6 @@ const App = () => {
   const userActions = useUserActions()
   const user = useUser()
   const { setNotification } = useNotificationActions()
-  const navigate = useNavigate();
 
   useEffect(() => {
     blogActions.initialize();
@@ -26,15 +25,6 @@ const App = () => {
   useEffect(() => {
     userActions.initialize();
   }, []);
-
-  const login = async (credentials) => {
-    try {
-      await userActions.login(credentials);
-      navigate("/");
-    } catch {
-      setNotification("Wrong credentials", "error");
-    }
-  };
 
   const logout = () => {
     userActions.logout()
@@ -111,7 +101,7 @@ const App = () => {
           path="/login"
           element={
             <ErrorBoundary>
-              <LoginForm login={login} />
+              <LoginForm />
             </ErrorBoundary>
           }
         />
