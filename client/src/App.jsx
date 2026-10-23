@@ -12,11 +12,13 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import { useBlogActions } from "./stores/useBlogStore"
 import { useNotificationActions } from "./stores/useNotificationStore";
+import { useUser, useUserActions } from "./stores/useUserStore";
 
 const App = () => {
   const blogActions = useBlogActions()
+  const userActions = useUserActions()
+  const user = useUser()
   const { setNotification } = useNotificationActions()
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,12 +26,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser");
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      blogService.setToken(user.token);
-      setUser(user);
-    }
+    userActions.initialize();
   }, []);
 
   const login = async (credentials) => {
