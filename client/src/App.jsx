@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
+
 import Blog from "./views/Blog";
 import LoginForm from "./views/LoginForm";
 import BlogForm from "./views/BlogForm";
 import BlogList from "./views/BlogList";
+import UserList from "./views/UserList";
+
 import Notification from "./components/Notification";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./components/NotFound";
 import NavBar from "./components/NavBar";
+
 import { useBlogActions } from "./stores/useBlogStore"
 import { useLoginActions } from "./stores/useLoginStore";
 
@@ -63,6 +67,15 @@ const App = () => {
           element={
             <ErrorBoundary>
               <LoginForm />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route 
+          path="/users"
+          element={
+            <ErrorBoundary>
+              <UserList />
             </ErrorBoundary>
           }
         />
