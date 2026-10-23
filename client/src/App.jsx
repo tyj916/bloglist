@@ -82,7 +82,7 @@ const App = () => {
         />
 
         <Route 
-          path="/users/:username"
+          path="/users/:id"
           element={
             <ErrorBoundary>
               <User />
