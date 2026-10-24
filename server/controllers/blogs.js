@@ -1,6 +1,9 @@
 const blogsRouter = require("express").Router();
+const commentsRouter = require('./comments')
 const Blog = require("../models/blog");
 const { userExtractor } = require("../utils/middleware");
+
+blogsRouter.use('/:blogId/comments', commentsRouter);
 
 blogsRouter.get("/", async (req, res) => {
   const blogs = await Blog.find({}).populate("user", {
