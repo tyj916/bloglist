@@ -10,7 +10,8 @@ const loginRouter = require("./controllers/login");
 
 const app = express();
 
-logger.info("Connecting to", config.MONGODB_URI);
+// logger.info("Connecting to", config.MONGODB_URI);
+logger.info("Connecting to mongodb...");
 
 mongoose
   .connect(config.MONGODB_URI, { family: 4 })
