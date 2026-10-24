@@ -6,7 +6,7 @@ const idTransform = (document, returnedObject) => {
   delete returnedObject.__v;
 }
 
-const commentSchema = mongoose.Schema({
+const commentSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
@@ -21,7 +21,7 @@ commentSchema.set("toJSON", {
   transform: idTransform
 })
 
-const blogSchema = mongoose.Schema({
+const blogSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
