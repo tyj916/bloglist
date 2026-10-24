@@ -6,6 +6,18 @@ const commentsRouter = express.Router({
   mergeParams: true
 })
 
+commentsRouter.get('/', async (req, res) => {
+  const { blogId } = req.params;
+  const blog = await Blog.findById(blogId)
+  
+  if (!blog) {
+    return res.status(404).end()
+  }
+
+  const { comments } = blog
+  return res.json(comments)
+})
+
 commentsRouter.post('/', allowAnonymous, async (req, res) => {
   const user = req.user
   const { blogId } = req.params
