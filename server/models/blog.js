@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const idTransform = (document, returnedObject) => {
+  returnedObject.id = returnedObject._id.toString();
+  delete returnedObject._id;
+  delete returnedObject.__v;
+}
+
 const commentSchema = mongoose.Schema({
   content: {
     type: String,
@@ -12,11 +18,7 @@ const commentSchema = mongoose.Schema({
 });
 
 commentSchema.set("toJSON", {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  }
+  transform: idTransform
 })
 
 const blogSchema = mongoose.Schema({
@@ -38,11 +40,7 @@ const blogSchema = mongoose.Schema({
 });
 
 blogSchema.set("toJSON", {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  },
+  transform: idTransform
 });
 
 module.exports = mongoose.model("Blog", blogSchema);
