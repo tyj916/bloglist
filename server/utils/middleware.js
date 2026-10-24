@@ -68,10 +68,19 @@ const userExtractor = async (req, res, next) => {
   next();
 };
 
+const allowAnonymous = async (req, res, next) => {
+  if (req.token) {
+    return userExtractor(req, res, next);
+  }
+
+  next()
+}
+
 module.exports = {
   requestLogger,
   unknownEndpoint,
   errorHandler,
   tokenExtractor,
   userExtractor,
+  allowAnonymous,
 };

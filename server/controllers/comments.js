@@ -1,14 +1,6 @@
 const express = require('express')
 const Blog = require('../models/blog')
-const { userExtractor } = require('../utils/middleware')
-
-const allowAnonymous = async (req, res, next) => {
-  if (req.token) {
-    return userExtractor(req, res, next);
-  }
-
-  next()
-}
+const { allowAnonymous } = require('../utils/middleware')
 
 const commentsRouter = express.Router({
   mergeParams: true
