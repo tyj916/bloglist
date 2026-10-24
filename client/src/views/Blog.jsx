@@ -1,6 +1,9 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+
 import NotFound from "../components/NotFound";
+import Comments from "../components/Comments";
+
 import { useBlogActions, useBlogs } from "../stores/useBlogStore";
 import { useNotificationActions } from "../stores/useNotificationStore";
 import { useLoginUser } from "../stores/useLoginStore";
@@ -79,6 +82,8 @@ const Blog = () => {
           </Button>
         )}
       </Stack>
+
+      <Comments comments={blog.comments} />
     </Box>
   );
 };
