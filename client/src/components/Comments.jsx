@@ -1,11 +1,19 @@
-import { Typography, TextField, Button, Box } from "@mui/material"
 import { useState } from "react"
+import { Typography, TextField, Button, Box } from "@mui/material"
+import blogService from '../services/blogs'
 
-const Comments = ({ comments }) => {
+const Comments = ({ blogId, comments }) => {
   const [comment, setComment] = useState('')
 
-  const handleSubmit = () => {
-    console.log("Add comment")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const returnedComment = await blogService.createComment({
+      id: blogId, 
+      content: comment,
+    });
+
+    console.log(returnedComment)
   }
 
   return (

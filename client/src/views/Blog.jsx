@@ -83,7 +83,7 @@ const Blog = () => {
         )}
       </Stack>
 
-      <Comments comments={blog.comments} />
+      <Comments blogId={blog.id} comments={blog.comments} />
     </Box>
   );
 };

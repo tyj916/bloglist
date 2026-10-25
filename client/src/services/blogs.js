@@ -21,6 +21,25 @@ const create = async (newObject) => {
   return request.data;
 };
 
+const createComment = async (newObject) => {
+  const { content } = newObject;
+  
+  const response = await fetch(`${baseUrl}/${newObject.id}/comments`, {
+    method: 'POST',
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content })
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to create comment');
+  }
+
+  return await response.json()
+}
+
 const update = async (newObject) => {
   const url = `${baseUrl}/${newObject.id}`;
 
@@ -47,6 +66,7 @@ export default {
   setToken,
   getAll,
   create,
+  createComment,
   update,
   remove,
 };
