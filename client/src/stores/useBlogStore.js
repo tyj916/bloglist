@@ -13,6 +13,16 @@ const useBlogStore = create((set, get) => ({
       set(state => ({ blogs: [...state.blogs, newBlog] }));
       return newBlog;
     },
+    addComment: async ({ blogId, comment }) => {
+      const newComment = await blogService.createComment({
+        id: blogId, 
+        content: comment,
+      });
+      set(state => ({ blogs: state.blogs.map(blog => blog.id === blogId 
+        ? { ...blog, comments: blog.comments.concat(newComment) } 
+        : blog) }))
+      return newComment;
+    },
     like: async (id) => {
       const blog = get().blogs.find(blog => blog.id === id)
       const updatedBlog = await blogService.update({ ...blog, likes: blog.likes + 1 })

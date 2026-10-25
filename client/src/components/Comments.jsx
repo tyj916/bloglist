@@ -1,21 +1,19 @@
 import { useState } from "react"
 import { Typography, TextField, Button, Box } from "@mui/material"
-import blogService from '../services/blogs'
+import { useBlogActions } from "../stores/useBlogStore"
 import { useNotificationActions } from '../stores/useNotificationStore'
 
+// Part of Blog
 const Comments = ({ blogId, comments }) => {
   const [comment, setComment] = useState('')
+  const { addComment } = useBlogActions()
   const { setNotification } = useNotificationActions()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const returnedComment = await blogService.createComment({
-        id: blogId, 
-        content: comment,
-      });
-
+      const returnedComment = await addComment({ blogId, comment});
       setNotification(`Comment '${returnedComment.content} added'`, 'success')
       setComment('')
     } catch {
