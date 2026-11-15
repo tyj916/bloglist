@@ -68,9 +68,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   notify_success:
+    needs: [deploy]
     runs-on: ubuntu-latest
     if: >-
       success() &&
+      github.event_name == 'push' &&
       !contains(join(github.event.commits.*.message, ' '), '#skip')
     steps:
       - name: Notify deployment success
@@ -85,3 +87,29 @@ jobs:
             **Commit:** `${{ github.sha }}`
             **Message:** ${{ github.event.head_commit.message }}
             **Author:** ${{ github.event.head_commit.author.username }}
+
+  notify_failure:
+    runs-on: ubuntu-latest
+    if: >-
+      !contains(join(github.event.commits.*.message, ' '), '#skip')
+    steps:
+      - name: Notify build failure
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.FS_DISCORD_WEBHOOK }}
+          nodetail: true
+          content: ":x: **Build Failed!** The pipeline encountered an error"
+          title: "Failure Details"
+          description: |
+            **Repository:** ${{ github.repository }}
+            **Branch:** ${{ github.head_ref || github.ref_name }}
+            **Commit:** `${{ github.sha }}`
+            **Message:** ${{ github.event.head_commit.message }}
+            **Author:** ${{ github.event.head_commit.author.username }}
+            **Workflow:** ${{ github.workflow }}
+            **Job:** deployment_pipeline
+
+            [View Commit](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
+            [View Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          color: 0xff0000
+
