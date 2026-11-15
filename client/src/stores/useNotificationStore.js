@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 
-const useNotificationStore = create((set, get) => ({
+const useNotificationStore = create((set) => ({
   message: '',
   type: '',
   actions: {
