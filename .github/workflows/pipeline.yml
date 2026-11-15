@@ -46,7 +46,8 @@ jobs:
     needs: [build_and_test]
     runs-on: ubuntu-latest
     if: >-
-      github.event_name == 'push'
+      github.event_name == 'push' &&
+      !contains(join(github.event.commits.*.message, ' '), '#skip')
     steps:
       - name: Trigger deployment
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
@@ -57,7 +58,8 @@ jobs:
     permissions:
       contents: write
     if: >-
-      github.event_name == 'push'
+      github.event_name == 'push' &&
+      !contains(join(github.event.commits.*.message, ' '), '#skip')
     steps:
       - uses: actions/checkout@v6
       - name: Bump version and push tag
