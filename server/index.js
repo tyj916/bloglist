@@ -3,12 +3,10 @@ const config = require("./utils/config");
 const logger = require("./utils/logger");
 const { connectToDatabase } = require("./utils/database");
 
-// logger.info("Connecting to", config.MONGODB_URI);
-logger.info("Connecting to mongodb...");
-
-
 const start = async () => {
   try {
+    // logger.info("Connecting to", config.MONGODB_URI);
+    logger.info("Connecting to mongodb...");
     await connectToDatabase();
     logger.info("Connected to MongoDB");
     app.listen(config.PORT, () => {
