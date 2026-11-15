@@ -15,7 +15,10 @@ jobs:
         with:
           node-version: '24'
       - name: Install dependencies
-        run: npm ci 
+        run: |
+          npm ci
+          npm ci --prefix server
+          npm ci --prefix client
+          npm ci --prefix playwright
       - name: Check style
         run: npm run lint
-        
