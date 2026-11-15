@@ -24,7 +24,7 @@ jobs:
         run: npm run lint
       - name: Run client and server tests
         env:
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.JWT_SECRET }}
         run: npm test 
       - name: Run npm build
         run: npm build
