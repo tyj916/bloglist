@@ -22,3 +22,7 @@ jobs:
           npm ci --prefix playwright
       - name: Check style
         run: npm run lint
+      - name: Run client and server tests
+        run: npm test 
+      - name: Run npm build
+        run: npm build
