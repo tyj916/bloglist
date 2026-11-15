@@ -16,6 +16,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "lint": "npm run lint --prefix server && npm run lint --prefix client",
     "build": "npm run build --prefix client",
     "start": "NODE_ENV=production npm start --prefix server",
     "start:test": "concurrently \"npm run start:test --prefix server\" \"npm run dev --prefix client\"",
