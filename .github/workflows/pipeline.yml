@@ -26,5 +26,5 @@ jobs:
         env:
           SECRET: ${{ secrets.JWT_SECRET }}
         run: npm test 
-      - name: Run npm build
-        run: npm build
+      - name: Run npm run build
+        run: npm run build
