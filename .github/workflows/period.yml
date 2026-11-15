@@ -1,4 +1,4 @@
-name: Periodic Hello
+name: Periodic health check
 
 on:
   workflow_dispatch:
@@ -12,4 +12,4 @@ jobs:
       - name: Check the deployed service URL 
         uses: jtalk/url-health-check-action@e7d5ebdc9027fbf494d2d034f3e8fc78f8b7a2b9
         with:
-          url: https://fs-pokedex-n7yy.onrender.com/
+          url: https://bloglist-zzfk.onrender.com
