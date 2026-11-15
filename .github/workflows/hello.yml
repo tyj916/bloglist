@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - cicd-pipeline
 
 jobs:
   hello_world_job:
@@ -12,4 +13,3 @@ jobs:
       - name: Say hello 
         run: |
           echo "Hello World!"
-          
