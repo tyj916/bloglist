@@ -39,3 +39,10 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 12
+
+  deploy:
+    needs: [build_and_test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment
+        run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
