@@ -9,7 +9,6 @@ const loginRouter = require("./controllers/login");
 const app = express();
 
 app.get('/health', (req, res) => {
-  if (true) throw ('test error no deploy');
   res.send('ok');
 });
 
