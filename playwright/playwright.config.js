@@ -79,6 +79,8 @@ export default defineConfig({
       url: 'http://localhost:3003/health',
       timeout: 120 * 1000,
       reuseExistingServer: !process.env.CI,
+      stdout: 'pipe',
+      stderr: 'pipe',
     },
     {
       command: 'npm run dev --prefix ../client',

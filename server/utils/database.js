@@ -9,11 +9,11 @@ const connectToDatabase = async() => {
   if (process.env.NODE_ENV === 'test') {
     mongod = await MongoMemoryServer.create();
     await mongoose.connect(mongod.getUri());
-    logger.info("Connected to MongoDB Memory Server");
+    console.log("Connected to MongoDB Memory Server");
   } else {
     try {
       await mongoose.connect(config.MONGODB_URI, { family: 4 });
-      logger.info("Connected to MongoDB Atlas");
+      console.log("Connected to MongoDB Atlas");
     } catch (error) {
       logger.error("Error connecting to MongoDB:", error.message);
     }
