@@ -23,11 +23,11 @@ const App = () => {
 
   useEffect(() => {
     blogActions.initialize();
-  }, []);
+  }, [blogActions]);
 
   useEffect(() => {
     loginActions.initialize();
-  }, []);
+  }, [loginActions]);
 
   return (
     <Container>
