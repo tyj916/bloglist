@@ -41,6 +41,12 @@ const mockBlogs = [{
     id: "god",
     name: "Username",
   },
+  comments: [
+    {
+      id: "comment-id",
+      content: "One comment"
+    }
+  ]
 }]
 
 const loggedInUser = {
