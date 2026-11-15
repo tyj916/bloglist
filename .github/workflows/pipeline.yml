@@ -32,10 +32,6 @@ jobs:
         run: npx playwright install --with-deps
         working-directory: playwright
       - name: Run Playwright tests
-        env:
-          SECRET: ${{ secrets.JWT_SECRET }}
-          CI: true
-          DEBUG: pw:webserver
         run: npm run test:e2e
       - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
