@@ -20,7 +20,8 @@
     "build": "npm run build --prefix client",
     "start": "NODE_ENV=production npm start --prefix server",
     "start:test": "concurrently \"npm run start:test --prefix server\" \"npm run dev --prefix client\"",
-    "test": "npm test --prefix playwright"
+    "test": "npm test --prefix client && npm test --prefix server",
+    "test:e2e": "npm test --prefix playwright"
   },
   "devDependencies": {
     "concurrently": "^10.0.6"

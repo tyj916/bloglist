@@ -10,7 +10,7 @@ const UserList = () => {
 
   useEffect(() => {
     initialize()
-  }, [])
+  }, [initialize])
 
   const users = useUsers()
 
