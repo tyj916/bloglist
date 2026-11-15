@@ -9,6 +9,8 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    env:
+      SECRET: ${{ secrets.JWT_SECRET }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -23,13 +25,12 @@ jobs:
       - name: Check style
         run: npm run lint
       - name: Run client and server tests
-        env:
-          SECRET: ${{ secrets.JWT_SECRET }}
         run: npm test 
       - name: Run npm run build
         run: npm run build
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps --prefix playwright
+        run: npx playwright install --with-deps
+        working-directory: playwright
       - name: Run Playwright tests
         run: npm run test:e2e
       - uses: actions/upload-artifact@v5
