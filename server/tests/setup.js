@@ -1,12 +1,19 @@
+const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
-const config = require('../utils/config');
+
+let mongod;
 
 const connect = async () => {
-  await mongoose.connect(config.MONGODB_URI, { family: 4 });
+  mongod = await MongoMemoryServer.create();
+
+  await mongoose.connect(mongod.getUri(), { family: 4 });
+
+  console.log("Connected to in-memory MongoDB");
 };
 
 const close = async () => {
-  await mongoose.connection.close();
+  await mongoose.disconnect();
+  await mongod.stop();
 };
 
 module.exports = { connect, close };

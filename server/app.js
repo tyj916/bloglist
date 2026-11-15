@@ -1,3 +1,4 @@
+require("./utils/config");
 const express = require("express");
 const path = require("path");
 const middleware = require("./utils/middleware");
