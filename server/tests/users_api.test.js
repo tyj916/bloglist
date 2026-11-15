@@ -1,6 +1,7 @@
-const { test, after, beforeEach, describe } = require("node:test");
+const { test, before, after, beforeEach, describe } = require("node:test");
 const assert = require("node:assert");
 const mongoose = require("mongoose");
+const connection = require("./setup");
 const supertest = require("supertest");
 const app = require("../app");
 const bcrypt = require("bcrypt");
@@ -8,6 +9,14 @@ const User = require("../models/user");
 const helper = require("./test_helper");
 
 const api = supertest(app);
+
+before(async () => {
+  await connection.connect();
+});
+
+after(async () => {
+  await connection.close();
+});
 
 describe("When there is initially one user in db", () => {
   beforeEach(async () => {

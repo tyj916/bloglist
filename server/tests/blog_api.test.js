@@ -1,6 +1,7 @@
 const { test, after, beforeEach, before, describe } = require("node:test");
 const assert = require("node:assert");
 const mongoose = require("mongoose");
+const connection = require("./setup");
 const supertest = require("supertest");
 const app = require("../app");
 const helper = require("./test_helper");
@@ -8,6 +9,14 @@ const Blog = require("../models/blog");
 const User = require("../models/user");
 
 const api = supertest(app);
+
+before(async () => {
+  await connection.connect();
+});
+
+after(async () => {
+  await connection.close();
+});
 
 describe("when there is initially some blogs saved", () => {
   let authToken = null;
