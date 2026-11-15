@@ -31,11 +31,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         working-directory: playwright
-      - name: Check MongoDB binary
-        run: |
-          cd server
-          node -e "const { MongoMemoryServer } = require('mongodb-memory-server'); MongoMemoryServer.create().then(async db => { console.log('MongoDB started:', db.getUri()); await db.stop(); }).catch(err => { console.error(err); process.exit(1); })"
-
       - name: Run Playwright tests
         env:
           SECRET: ${{ secrets.JWT_SECRET }}
