@@ -45,6 +45,8 @@ jobs:
   deploy:
     needs: [build_and_test]
     runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'push'
     steps:
       - name: Trigger deployment
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
