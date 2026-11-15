@@ -82,7 +82,7 @@ jobs:
           nodetail: true
           content: ":white_check_mark: **Deployment Successful!** A new version deployed to production"
           title: "Deployment Details"
-          url: "https://github.com/tyj916/fs-pokedex"
+          url: "https://github.com/tyj916/bloglist"
           description: |
             **Commit:** `${{ github.sha }}`
             **Message:** ${{ github.event.head_commit.message }}
