@@ -10,3 +10,25 @@ services:
       - 8080:80
     depends_on:
       - app
+      - server
+
+  server:
+    image: bloglist-backend-dev
+    environment:
+      - PORT=3003 
+      - SECRET=SomeSecret
+      - MONGODB_URI=mongodb://root:password@mongo:27017/the_database?authSource=admin
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
