@@ -8,6 +8,7 @@ import BlogList from "./views/BlogList";
 import LoginForm from "./views/LoginForm";
 import User from "./views/User";
 import UserList from "./views/UserList";
+import SignUpForm from "./views/SignUpForm";
 
 import Notification from "./components/Notification";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -68,6 +69,15 @@ const App = () => {
           element={
             <ErrorBoundary>
               <LoginForm />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route
+          path="/signUp"
+          element={
+            <ErrorBoundary>
+              <SignUpForm />
             </ErrorBoundary>
           }
         />
