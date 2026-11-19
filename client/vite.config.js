@@ -11,6 +11,7 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    allowedHosts: ['app', 'localhost']
   },
   test: {
     environment: "jsdom",

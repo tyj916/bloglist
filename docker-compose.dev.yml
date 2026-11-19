@@ -1,0 +1,48 @@
+services:
+  app:
+    image: bloglist-front-dev
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./client:/usr/src/app
+    ports:
+      - 5173:5173
+
+  nginx:
+    image: nginx:1.29
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+      - server
+
+  server:
+    image: bloglist-backend-dev
+    build:
+      context: ./server
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./server:/usr/src/app
+    ports:
+      - 3003:3003
+    environment:
+      - PORT=3003 
+      - SECRET=SomeSecret
+      - MONGODB_URI=mongodb://root:password@mongo:27017/the_database?authSource=admin
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
