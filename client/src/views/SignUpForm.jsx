@@ -2,12 +2,14 @@ import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import signUpService from "../services/signUp";
+import { useLoginActions } from "../stores/useLoginStore";
 import { useNotificationActions } from "../stores/useNotificationStore";
 
 const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useLoginActions();
   const { setNotification } = useNotificationActions()
   const navigate = useNavigate()
 
@@ -16,6 +18,8 @@ const SignUpForm = () => {
 
     try {
       await signUpService.signUp({ username, name, password });
+      await login({ username, password });
+      setNotification(`Successfully sign up. Logged in as ${username}.`, "success");
       setUsername("");
       setName("");
       setPassword("");
